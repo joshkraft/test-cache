@@ -22,5 +22,11 @@ jobs:
             CACHE_KEY="cache-key-$i"
             echo "Generating cache entry $CACHE_KEY"
             echo "$CACHE_KEY" > "cache-file-$i.txt"
-            echo "::save-cache key=$CACHE_KEY path=cache-file-$i.txt::"
           done
+
+      - name: Cache files
+        uses: actions/cache@v2
+        with:
+          path: |
+            cache-file-*.txt
+          key: ${{ runner.os }}-cache-files-${{ github.run_number }}
