@@ -16,9 +16,8 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies and generate cache
+      - name: Generate cache entries
         run: |
-          npm ci
           for i in {1..10}; do
             CACHE_KEY="cache-key-$i"
             echo "Generating cache entry $CACHE_KEY"
