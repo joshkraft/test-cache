@@ -1,0 +1,27 @@
+name: Cache Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies and generate cache
+        run: |
+          npm ci
+          for i in {1..10}; do
+            CACHE_KEY="cache-key-$i"
+            echo "Generating cache entry $CACHE_KEY"
+            echo "$CACHE_KEY" > "cache-file-$i.txt"
+            echo "::save-cache key=$CACHE_KEY path=cache-file-$i.txt::"
+          done
