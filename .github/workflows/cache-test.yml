@@ -26,7 +26,7 @@ jobs:
 
       - name: Cache files
         uses: actions/cache@v2
-        with:
+        with:          
           path: |
-            cache-file-*.txt
+            ${{ join([format('cache-file-{0}.txt', idx) for idx in range(1, 101)], '\n') }}
           key: ${{ runner.os }}-cache-files-${{ github.run_number }}
