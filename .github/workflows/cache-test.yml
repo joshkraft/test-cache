@@ -18,7 +18,7 @@ jobs:
 
       - name: Generate cache entries
         run: |
-          for i in {1..10}; do
+          for i in {1..100}; do
             CACHE_KEY="cache-key-$i"
             echo "Generating cache entry $CACHE_KEY"
             echo "$CACHE_KEY" > "cache-file-$i.txt"
